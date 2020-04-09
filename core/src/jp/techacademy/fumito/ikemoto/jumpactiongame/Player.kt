@@ -1,5 +1,7 @@
 package jp.techacademy.fumito.ikemoto.jumpactiongame
 
+import com.badlogic.gdx.Gdx
+import com.badlogic.gdx.audio.Sound
 import com.badlogic.gdx.graphics.Texture
 
 class Player(texture: Texture, srcX: Int, srcY: Int, srcWidth: Int, srcHeight: Int)
@@ -20,10 +22,12 @@ class Player(texture: Texture, srcX: Int, srcY: Int, srcWidth: Int, srcHeight: I
     }
 
     private var mState: Int
+    private var damegeSe: Sound
 
     init {
         setSize(PLAYER_WIDTH, PLAYER_HEIGHT)
         mState = PLAYER_STATE_FALL
+        damegeSe = Gdx.audio.newSound(Gdx.files.internal("slap1.mp3"))
     }
 
     fun update(delta: Float, accelX: Float) {
@@ -58,6 +62,11 @@ class Player(texture: Texture, srcX: Int, srcY: Int, srcWidth: Int, srcHeight: I
     fun hitStep() {
         velocity.y = PLAYER_JUMP_VELOCITY
         mState = PLAYER_STATE_JUMP
+    }
+
+    fun playDamegeSe()
+    {
+        damegeSe.play()
     }
 
 }

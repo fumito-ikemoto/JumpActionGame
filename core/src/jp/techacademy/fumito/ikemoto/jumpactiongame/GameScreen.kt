@@ -261,12 +261,13 @@ class GameScreen(private val mGame: JumpActionGame) : ScreenAdapter() {
             return
         }
 
+        //敵との接触
         for(i in 0 until  mEnemys.size)
         {
             val enemy = mEnemys[i]
             if(mPlayer.boundingRectangle.overlaps(enemy.boundingRectangle))
             {
-
+                mPlayer.playDamegeSe()
                 mGameState = GAME_STATE_GAMEOVER
                 return
             }
